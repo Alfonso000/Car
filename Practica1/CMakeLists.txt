@@ -1,10 +1,14 @@
-cmake_minimum_required(VERSION 3.10)
-project(practica1 C)
+cmake_minimum_required(VERSION 3.12)
+project(practica1)
 # Configuración del estándar de C++
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
-set(SOURCE src/Ejercicio1.c)
+
+# Incluir el directorio que contiene Ejercicio1.h
+# include_directories(${CMAKE_SOURCE_DIR}/include)
+
+set(SOURCE main.c src/Ejercicio1.c)
 
 add_executable(casa ${SOURCE})
 
