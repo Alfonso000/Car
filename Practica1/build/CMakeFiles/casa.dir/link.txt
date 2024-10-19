@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/casa.dir/src/Ejercicio1.c.o -o casa 

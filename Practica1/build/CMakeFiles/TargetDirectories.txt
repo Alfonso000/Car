@@ -1,0 +1,3 @@
+/home/alfonso/Car/Practica1/build/CMakeFiles/casa.dir
+/home/alfonso/Car/Practica1/build/CMakeFiles/edit_cache.dir
+/home/alfonso/Car/Practica1/build/CMakeFiles/rebuild_cache.dir
