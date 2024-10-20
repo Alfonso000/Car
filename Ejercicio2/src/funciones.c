@@ -9,12 +9,12 @@ void* sumarfila(void* arg){
     struct datos* d = args->d;
     int fila = args->fila;
 
-        // Sumar la fila indicada de matriz1 y matriz2 y almacenar el resultado en matriz3
-    printf("Sumando fila %d:\n", fila);
+    // Sumar la fila indicada de matriz1 y matriz2 y almacenar el resultado en matriz3
+    // printf("Sumando fila %d:\n", fila);
     for (int j = 0; j < d->columnas; j++) {
         d->matriz3[fila][j] = d->matriz1[fila][j] + d->matriz2[fila][j];
         // Imprimir el resultado de la suma
-        printf("%d  ", d->matriz3[fila][j]);
+        // printf("%d  ", d->matriz3[fila][j]);
     }
     printf("\n");
     
@@ -31,33 +31,4 @@ void introducir_matriz(int filas, int columnas, int matriz[filas][columnas]){
     }
 }
 
-
-
-// void* introducir_datos(void* arg){
-//     struct datos* d = (struct datos*)arg; // Convertir arg a un puntero a datos
-
-//     printf("Input a number:");
-//     scanf("%d", &d->numero);
-
-//  // Limpiar el buffer de entrada
-//     while (getchar() != '\n'); // Limpiar el buffer después de scanf
-
-//     printf("Input first string:");
-//     fgets(d->string1, 1000, stdin);  // Leemos la primera cadena
-
-//     printf("Input second string:");
-//     fgets(d->string2, 1000, stdin);  // Leemos la segunda cadena
-
-// }
-
-
-// void* imprimir_string1(void* arg) {
-//     struct datos* d = (struct datos*)arg; // Convertir arg a un puntero a datos
-//     int n = d->numero; // Obtener el número de repeticiones
-
-//     // Imprimir el ID del hilo y string1
-//     for (int i = 0; i < n; i++) {
-//         printf("thread (%ld): %d %s\n", pthread_self(), i + 1, d->string1);
-//     }
-// }
 

@@ -25,7 +25,7 @@ int main() {
 
 
     // Imprimir la matriz
-    printf("\nLa matriz es:\n");
+    printf("\nLa matriz resultado es:\n");
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             printf("%d ", d.matriz3[i][j]);
