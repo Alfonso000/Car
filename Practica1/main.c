@@ -7,7 +7,7 @@ int main() {
 
     while (1)
     {
-       pthread_create(&hilo1, NULL, introducir_datos, (void*)&d);
+    pthread_create(&hilo1, NULL, introducir_datos, (void*)&d);
     pthread_join(hilo1, NULL); 
 
     pthread_create(&hilo1, NULL, imprimir_string1, (void*)&d);
