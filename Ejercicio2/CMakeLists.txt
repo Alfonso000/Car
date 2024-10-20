@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 # Incluir el directorio que contiene Ejercicio1.h
 # include_directories(${CMAKE_SOURCE_DIR}/include)
 
-set(SOURCE prueba.c )
+set(SOURCE main.c src/funciones.c)
 
 add_executable(casa ${SOURCE})
 

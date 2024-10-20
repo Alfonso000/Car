@@ -1,33 +1,34 @@
 #include "include/funciones.h"
 
-
 int main() {
 
-    pthread_t hilo1, hilo2;
-    // struct datos d;
+    pthread_t hilo1, hilo2, hilo3;
+    struct datos d,t,m;
 
-    int filas = 3;
-    int columnas = 3;
-    int matriz[filas][columnas];  // Declarar una matriz de 3x3
-    // while (1)
-    // {
-    // pthread_create(&hilo1, NULL, introducir_datos, (void*)&d);
-    // pthread_join(hilo1, NULL); 
+    d.filas = 3;
+    d.columnas = 3;
 
-    // pthread_create(&hilo1, NULL, imprimir_string1, (void*)&d);
-    // pthread_create(&hilo2, NULL, imprimir_string2, (void*)&d);
+    introducir_matriz(d.filas, d.columnas, d.matriz1);
+    introducir_matriz(d.filas, d.columnas, d.matriz2);
+
+    int filas[3] = {0, 1, 2};  // Índices de las filas para seleccionar que fila se lee
+
+    pthread_create(&hilo1, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[0]});
+    pthread_create(&hilo2, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[1]});
+    pthread_create(&hilo3, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[2]});
+
     
-    // pthread_join(hilo1, NULL);
-    // pthread_join(hilo2, NULL);
-    // }
+    
+    pthread_join(hilo1, NULL);
+    pthread_join(hilo2, NULL);
+    pthread_join(hilo3, NULL);
 
 
-    introducir_matriz(filas, columnas, matriz);
-    // // Imprimir la matriz
+    // Imprimir la matriz
     printf("\nLa matriz es:\n");
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            printf("%d ", matriz[i][j]);
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", d.matriz3[i][j]);
         }
         printf("\n");  // Para pasar a la siguiente fila
     }   
@@ -36,12 +37,8 @@ int main() {
     return 0;
 }
 
-void introducir_matriz(int filas, int columnas, int matriz[filas][columnas]){
-     printf("Introduce los valores para una matriz de 3x3:\n");
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            printf("Elemento [%d][%d]: ", i, j);
-            scanf("%d", matriz[i][j]);  // Leer los valores de la matriz
-        }
-    }
-}
+
+
+
+
+

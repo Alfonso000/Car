@@ -1,41 +1,41 @@
-// #include <stdio.h>
+#include <stdio.h>
 
-// // Declaración de la función que modifica una matriz
-// void modificarMatriz(int filas, int columnas, int matriz[filas][columnas]) {
-//     for (int i = 0; i < filas; i++) {
-//         for (int j = 0; j < columnas; j++) {
-//             matriz[i][j] += 1; // Incrementa cada elemento en 1
-//         }
-//     }
-// }
+// Declaración de la función que modifica una matriz
+void modificarMatriz(int filas, int columnas, int matriz[filas][columnas]) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] += 1; // Incrementa cada elemento en 1
+        }
+    }
+}
 
-// int main() {
-//     int matriz[2][3] = {
-//         {1, 2, 3},
-//         {4, 5, 6}
-//     };
+int main() {
+    int matriz[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
 
-//     printf("Matriz antes de modificar:\n");
-//     for (int i = 0; i < 2; i++) {
-//         for (int j = 0; j < 3; j++) {
-//             printf("%d ", matriz[i][j]);
-//         }
-//         printf("\n");
-//     }
+    printf("Matriz antes de modificar:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
 
-//     // Llamada a la función pasando la matriz por referencia
-//     modificarMatriz(2, 3, matriz);
+    // Llamada a la función pasando la matriz por referencia
+    modificarMatriz(2, 3, matriz);
 
-//     printf("Matriz después de modificar:\n");
-//     for (int i = 0; i < 2; i++) {
-//         for (int j = 0; j < 3; j++) {
-//             printf("%d ", &matriz[i][j]);
-//         }
-//         printf("\n");
-//     }
+    printf("Matriz después de modificar:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", &matriz[i][j]);
+        }
+        printf("\n");
+    }
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 
