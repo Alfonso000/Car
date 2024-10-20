@@ -11,5 +11,4 @@ struct datos
     pthread_mutex_t mutex; // Mutex para proteger el acceso a 'n'
 };
 
-void buscarnumero2(int vector[], int buscar, int* n);
 void* buscarnumero(void* arg);

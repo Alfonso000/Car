@@ -1,5 +1,28 @@
 #include "../include/funciones.h"
 
+void* buscarnumero(void* arg){
+     struct {
+        struct datos* d;
+        int incremento;
+    } *args = arg;  // Obtener los argumentos
+    struct datos* d = args->d;
+    int fin = args->incremento;
+    int inicio = fin-5;
+   
+
+    int cuenta_local = 0;
+    for (int i = inicio; i < fin; i++)
+    {
+        if(d->vector[i] == d->buscar){
+            cuenta_local++;
+        }
+    }
+    // Actualizar el contador global de manera segura usando el mutex
+    pthread_mutex_lock(&d->mutex);
+    d->n += cuenta_local;
+    pthread_mutex_unlock(&d->mutex);
+}
+
 
 // void* sumarfila(void* arg){
 //     struct { // se utiliza esto para poder acceder a diferentes filas

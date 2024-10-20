@@ -38,45 +38,14 @@ int main() {
       // Imprimir el resultado final
     printf("El número %d se repite %d veces.\n", d.buscar, d.n);
 
-    // Destruir el mutex
+    
     pthread_mutex_destroy(&d.mutex);
 
     return 0;
 }
 
-void buscarnumero2(int vector[],int buscar, int* n){
-   
-    for (int i = 0; i < 20; i++)
-    {
-        if(vector[i] == buscar){
-            *n = *n + 1;
-        }
-    }
-    printf("El numero se repite estas veces: %d ", *n);
-}
 
-void* buscarnumero(void* arg){
-     struct {
-        struct datos* d;
-        int incremento;
-    } *args = arg;  // Obtener los argumentos
-    struct datos* d = args->d;
-    int fin = args->incremento;
-    int inicio = fin-5;
-   
 
-    int cuenta_local = 0;
-    for (int i = inicio; i < fin; i++)
-    {
-        if(d->vector[i] == d->buscar){
-            cuenta_local++;
-        }
-    }
-    // Actualizar el contador global de manera segura usando el mutex
-    pthread_mutex_lock(&d->mutex);
-    d->n += cuenta_local;
-    pthread_mutex_unlock(&d->mutex);
-}
 
 
 
