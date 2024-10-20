@@ -2,40 +2,82 @@
 
 int main() {
 
-    pthread_t hilo1, hilo2, hilo3;
-    struct datos d,t,m;
+    pthread_t hilo1, hilo2, hilo3, hilo4;
+    struct datos d;
 
-    d.filas = 3;
-    d.columnas = 3;
-
-    introducir_matriz(d.filas, d.columnas, d.matriz1);
-    introducir_matriz(d.filas, d.columnas, d.matriz2);
-
-    int filas[3] = {0, 1, 2};  // Índices de las filas para seleccionar que fila se lee
-
-    pthread_create(&hilo1, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[0]});
-    pthread_create(&hilo2, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[1]});
-    pthread_create(&hilo3, NULL, sumarfila, (void*)&(struct {struct datos* d; int fila;}){&d, filas[2]});
-
+    d.buscar = 6;
+    d.n = 0;
     
-    
+      // Inicializar la semilla para la generación de números aleatorios
+    srand(time(0));
+
+    // Generar números aleatorios entre 0 y 9 y almacenarlos en el vector
+    for (int i = 0; i < 20; i++) {
+        d.vector[i] = rand() % 10;  // Generar un número entre 0 y 9
+    }
+
+    // Imprimir el vector generado
+    printf("Vector aleatorio:\n");
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", d.vector[i]);
+    }
+    printf("\n");
+
+ 
+    pthread_create(&hilo1, NULL, buscarnumero, (void*)&(struct {struct datos* d; int incremento;}){&d, 5});
+    pthread_create(&hilo2, NULL, buscarnumero, (void*)&(struct {struct datos* d; int incremento;}){&d, 10});
+    pthread_create(&hilo3, NULL, buscarnumero, (void*)&(struct {struct datos* d; int incremento;}){&d, 15});
+    pthread_create(&hilo4, NULL, buscarnumero, (void*)&(struct {struct datos* d; int incremento;}){&d, 20});
+
     pthread_join(hilo1, NULL);
     pthread_join(hilo2, NULL);
     pthread_join(hilo3, NULL);
+    pthread_join(hilo4, NULL);
 
 
-    // Imprimir la matriz
-    printf("\nLa matriz es:\n");
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            printf("%d ", d.matriz3[i][j]);
-        }
-        printf("\n");  // Para pasar a la siguiente fila
-    }   
+      // Imprimir el resultado final
+    printf("El número %d se repite %d veces.\n", d.buscar, d.n);
 
+    // Destruir el mutex
+    pthread_mutex_destroy(&d.mutex);
 
     return 0;
 }
+
+void buscarnumero2(int vector[],int buscar, int* n){
+   
+    for (int i = 0; i < 20; i++)
+    {
+        if(vector[i] == buscar){
+            *n = *n + 1;
+        }
+    }
+    printf("El numero se repite estas veces: %d ", *n);
+}
+
+void* buscarnumero(void* arg){
+     struct {
+        struct datos* d;
+        int incremento;
+    } *args = arg;  // Obtener los argumentos
+    struct datos* d = args->d;
+    int fin = args->incremento;
+    int inicio = fin-5;
+   
+
+    int cuenta_local = 0;
+    for (int i = inicio; i < fin; i++)
+    {
+        if(d->vector[i] == d->buscar){
+            cuenta_local++;
+        }
+    }
+    // Actualizar el contador global de manera segura usando el mutex
+    pthread_mutex_lock(&d->mutex);
+    d->n += cuenta_local;
+    pthread_mutex_unlock(&d->mutex);
+}
+
 
 
 

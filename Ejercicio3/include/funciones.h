@@ -1,29 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-
-// struct datos
-//     {
-//         int numero; 
-//         char string1[1000]; 
-//         char string2 [1000];
-//     };
-
-
-// void* introducir_datos(void* arg);
-// void* imprimir_string1(void* arg);
-// void* imprimir_string2(void* arg);
-//*(matriz + i * columnas + j)
+#include <time.h>
 
 struct datos
 {
-    int filas;
-    int columnas;
-    int matriz1[3][3];
-    int matriz2[3][3];
-    int matriz3[3][3];
+    int buscar;
+    int vector[20];
+    int n;
+    pthread_mutex_t mutex; // Mutex para proteger el acceso a 'n'
 };
 
-
-void introducir_matriz(int filas, int columnas, int matriz[filas][columnas]);
-void* sumarfila(void* arg);
+void buscarnumero2(int vector[], int buscar, int* n);
+void* buscarnumero(void* arg);
